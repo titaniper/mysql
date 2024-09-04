@@ -48,3 +48,5 @@ FLUSH PRIVILEGES;
 -- 추가: 현재 사용자(관리자)의 권한 확인
 SHOW GRANTS FOR CURRENT_USER();
 ```
+
+# 테스트
