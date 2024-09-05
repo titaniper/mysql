@@ -1,0 +1,2 @@
+server_address: pmm-server:443
+server_insecure_tls: true

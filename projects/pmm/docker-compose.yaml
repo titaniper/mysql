@@ -1,0 +1,32 @@
+version: '3'
+services:
+  pmm-server:
+    image: percona/pmm-server:2
+    ports:
+      - "9090:80"      # HTTP 웹 인터페이스
+      - "9443:443"     # HTTPS 웹 인터페이스
+      - "35000:42000"  # clickhouse-server
+      - "35001:42002"  # postgresql
+      - "35002:42003"  # orchestrator
+    environment:
+      - DISABLE_TELEMETRY=1
+      - DISABLE_UPDATES=1
+      - DISABLE_AUTHENTICATION=1  # 인증 비활성화
+    volumes:
+      - pmm-data:/srv
+    restart: always
+
+  pmm-client:
+    image: percona/pmm-client:2
+    depends_on:
+      - pmm-server
+    environment:
+      - PMM_AGENT_SERVER_ADDRESS=pmm-server:443
+      - PMM_AGENT_SERVER_INSECURE_TLS=1
+      - PMM_AGENT_SETUP=1
+    volumes:
+      - ./agent.yml:/usr/local/percona/pmm2/config/agent.yml
+    restart: always
+
+volumes:
+  pmm-data:
