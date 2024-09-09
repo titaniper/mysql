@@ -1,0 +1,272 @@
+
+--- 현재 LOCK이 걸려 대기중인 정보 ---
+
+--- LOCK을 건 정보 ---
+
+--- LOCK을 걸고 있는 프로세스 정보 ---
+
+--- InnoDB 테이블 잠금 관련 변수 ---
+[
+  {
+    "Variable_name": "innodb_table_locks",
+    "Value": "ON"
+  }
+]
+
+--- 데드락 감지 관련 변수 ---
+[
+  {
+    "Variable_name": "innodb_deadlock_detect",
+    "Value": "ON"
+  }
+]
+
+--- InnoDB 잠금 관련 변수 ---
+[
+  {
+    "Variable_name": "innodb_lock_wait_timeout",
+    "Value": "50"
+  },
+  {
+    "Variable_name": "innodb_locks_unsafe_for_binlog",
+    "Value": "OFF"
+  }
+]
+
+--- 메타데이터 잠금 관련 프로세스 ---
+[]
+
+--- Top 10 크기 테이블 통계 ---
+[
+  {
+    "TABLE_NAME": "ddd_event",
+    "TABLE_ROWS": "23069",
+    "AVG_ROW_LENGTH": "432",
+    "DATA_LENGTH": "9977856",
+    "INDEX_LENGTH": "0"
+  },
+  {
+    "TABLE_NAME": "payment_account",
+    "TABLE_ROWS": "3523",
+    "AVG_ROW_LENGTH": "599",
+    "DATA_LENGTH": "2113536",
+    "INDEX_LENGTH": "0"
+  },
+  {
+    "TABLE_NAME": "stripe_invoice_map",
+    "TABLE_ROWS": "3205",
+    "AVG_ROW_LENGTH": "127",
+    "DATA_LENGTH": "409600",
+    "INDEX_LENGTH": "0"
+  },
+  {
+    "TABLE_NAME": "payment_method_attached_event",
+    "TABLE_ROWS": "512",
+    "AVG_ROW_LENGTH": "224",
+    "DATA_LENGTH": "114688",
+    "INDEX_LENGTH": "0"
+  }
+]
+
+--- 슬로우 쿼리 로그 설정 ---
+[
+  {
+    "Variable_name": "slow_query_log",
+    "Value": "ON"
+  },
+  {
+    "Variable_name": "slow_query_log_file",
+    "Value": "/rdsdbdata/log/slowquery/mysql-slowquery.log"
+  }
+]
+
+--- 쿼리 캐시 상태 ---
+[
+  {
+    "Variable_name": "Qcache_free_blocks",
+    "Value": "592"
+  },
+  {
+    "Variable_name": "Qcache_free_memory",
+    "Value": "313640"
+  },
+  {
+    "Variable_name": "Qcache_hits",
+    "Value": "3414125"
+  },
+  {
+    "Variable_name": "Qcache_inserts",
+    "Value": "206266"
+  },
+  {
+    "Variable_name": "Qcache_lowmem_prunes",
+    "Value": "123111"
+  },
+  {
+    "Variable_name": "Qcache_not_cached",
+    "Value": "2488069"
+  },
+  {
+    "Variable_name": "Qcache_queries_in_cache",
+    "Value": "40195"
+  },
+  {
+    "Variable_name": "Qcache_total_blocks",
+    "Value": "123031"
+  }
+]
+
+--- 연결 관련 상태 ---
+[
+  {
+    "Variable_name": "Connection_errors_accept",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Connection_errors_internal",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Connection_errors_max_connections",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Connection_errors_peer_address",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Connection_errors_select",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Connection_errors_tcpwrap",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Connections",
+    "Value": "61182"
+  },
+  {
+    "Variable_name": "Max_used_connections",
+    "Value": "159"
+  },
+  {
+    "Variable_name": "Max_used_connections_time",
+    "Value": "2024-09-04 06:24:20"
+  },
+  {
+    "Variable_name": "Time_since_zero_connections",
+    "Value": "0"
+  }
+]
+
+--- 스레드 관련 상태 ---
+[
+  {
+    "Variable_name": "AuroraDb_thread_deadlocks",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Delayed_insert_threads",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "External_threads_connected",
+    "Value": "125"
+  },
+  {
+    "Variable_name": "Performance_schema_thread_classes_lost",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Performance_schema_thread_instances_lost",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Slow_launch_threads",
+    "Value": "0"
+  },
+  {
+    "Variable_name": "Threads_cached",
+    "Value": "10"
+  },
+  {
+    "Variable_name": "Threads_connected",
+    "Value": "130"
+  },
+  {
+    "Variable_name": "Threads_created",
+    "Value": "38"
+  },
+  {
+    "Variable_name": "Threads_running",
+    "Value": "5"
+  }
+]
+
+--- 임시 테이블 사용 통계 ---
+[
+  {
+    "Variable_name": "Created_tmp_disk_tables",
+    "Value": "1"
+  },
+  {
+    "Variable_name": "Created_tmp_files",
+    "Value": "1463"
+  },
+  {
+    "Variable_name": "Created_tmp_tables",
+    "Value": "9"
+  }
+]
+
+--- 버퍼 풀 상태 ---
+[]
+
+--- 테이블 잠금 상태 ---
+[
+  {
+    "Variable_name": "Table_locks_immediate",
+    "Value": "99"
+  },
+  {
+    "Variable_name": "Table_locks_waited",
+    "Value": "0"
+  }
+]
+
+--- 최대 오픈 파일 수 ---
+[
+  {
+    "Variable_name": "open_files_limit",
+    "Value": "1048576"
+  }
+]
+
+--- 현재 오픈된 파일 수 ---
+[
+  {
+    "Variable_name": "Innodb_num_open_files",
+    "Value": "1773"
+  },
+  {
+    "Variable_name": "Open_files",
+    "Value": "2"
+  }
+]
+
+--- InnoDB 엔진 상태 ---
+
+--- 현재 실행 중인 쿼리 ---
+[
+  {
+    "ID": "61181",
+    "USER": "ben",
+    "HOST": "172.22.9.36:45336",
+    "DB": "payment",
+    "COMMAND": "Query",
+    "TIME": 0,
+    "STATE": "executing",
+    "INFO": "SELECT ID, USER, HOST, DB, COMMAND, TIME, STATE, INFO\n    FROM information_schema.PROCESSLIST\n    WHERE COMMAND != 'Sleep'\n    ORDER BY TIME DESC"
+  }
+]

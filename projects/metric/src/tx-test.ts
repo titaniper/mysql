@@ -3,16 +3,15 @@ import { performance } from 'perf_hooks';
 
 const dataSource = new DataSource({
   type: 'mysql',
-  host: "localhost",
-  port: 3309,
-  database: "payment",
-  username: "root",
-  password: "1234",
-  timezone: 'UTC+0',
-  synchronize: false,
-  supportBigNumbers: true,
-  bigNumberStrings: false,
+  host: process.env.DB_HOST || "127.0.0.1",
+  port: parseInt(process.env.DB_PORT || "3307"),
+  database: process.env.DB_NAME || "payment",
+  username: process.env.DB_USERNAME || "root",
+  password: process.env.DB_PASSWORD || "1234",
+  timezone: process.env.DB_TIMEZONE || 'UTC+0',
+  synchronize: process.env.DB_SYNCHRONIZE === 'true',
 });
+
 
 async function insertStripeInvoiceMap(
   entityManager: EntityManager,
@@ -48,6 +47,19 @@ async function logDatabaseMetricsWithExplanations(queryRunner: QueryRunner) {
   };
 
   // 테이블 통계
+  await logQuery("SELECT * FROM information_schema.INNODB_LOCK_WAITS", "현재 LOCK이 걸려 대기중인 정보");
+  await logQuery("SELECT * FROM information_schema.INNODB_LOCKS", "LOCK을 건 정보");
+  await logQuery("SELECT * FROM information_schema.INNODB_TRX", "LOCK을 걸고 있는 프로세스 정보");
+  await logQuery("SHOW VARIABLES LIKE 'innodb_table_lock%'", "InnoDB 테이블 잠금 관련 변수");
+  await logQuery("SHOW VARIABLES LIKE 'innodb_deadlock%'", "데드락 감지 관련 변수");
+  await logQuery("SHOW VARIABLES LIKE 'innodb_lock%'", "InnoDB 잠금 관련 변수");
+  await logQuery(`
+    SELECT ID, USER, HOST, DB, COMMAND, TIME, STATE, INFO 
+    FROM information_schema.PROCESSLIST 
+    WHERE PROCESSLIST.STATE LIKE '%metadata lock%' 
+    ORDER BY TIME DESC
+  `, "메타데이터 잠금 관련 프로세스");
+
   await logQuery(`
     SELECT TABLE_NAME, TABLE_ROWS, AVG_ROW_LENGTH, DATA_LENGTH, INDEX_LENGTH
     FROM information_schema.TABLES

@@ -26,6 +26,8 @@
 
 ### 권한 주기
 ```
+SHOW MASTER STATUS;
+
 -- 1. 외부 접속 가능한 권한 없는 유저 만들기
 CREATE USER 'externaluser'@'%' IDENTIFIED BY 'strong_password';
 
@@ -50,3 +52,42 @@ SHOW GRANTS FOR CURRENT_USER();
 ```
 
 # 테스트
+```
+-- 1. 데이터베이스 생성
+CREATE DATABASE IF NOT EXISTS core;
+CREATE DATABASE IF NOT EXISTS core1;
+
+-- 2. core 데이터베이스에 ddd_event 테이블 생성
+USE core;
+CREATE TABLE IF NOT EXISTS ddd_event (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data VARCHAR(255)
+);
+
+-- 3. core1 데이터베이스에 ddd_event 테이블 생성
+USE core1;
+CREATE TABLE IF NOT EXISTS ddd_event (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data VARCHAR(255)
+);
+
+-- 4. 외부 접속 가능한 사용자 생성 (이미 존재하는 경우 이 줄은 제외)
+-- CREATE USER 'externaluser'@'%' IDENTIFIED BY 'strong_password';
+
+-- 5. 전역 권한 부여
+GRANT RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'externaluser'@'%';
+
+-- 6. core.ddd_event 테이블에 대한 특정 권한 부여 (예: SELECT, INSERT, UPDATE, DELETE)
+GRANT SELECT, INSERT, UPDATE, DELETE ON core.* TO 'externaluser'@'%';
+GRANT SELECT ON core.* TO 'externaluser'@'%';
+REVOKE INSERT, UPDATE, DELETE ON core.* FROM 'externaluser'@'%';
+
+-- 7. 권한 변경사항 적용
+FLUSH PRIVILEGES;
+
+-- 8. 부여된 권한 확인
+SHOW GRANTS FOR 'externaluser'@'%';
+
+
+INSERT INTO core1.ddd_event (data)  VALUES ('rrr'); 
+```
