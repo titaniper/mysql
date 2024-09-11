@@ -12,28 +12,27 @@ const dataSource = new DataSource({
   synchronize: process.env.DB_SYNCHRONIZE === 'true',
 });
 
-
-async function insertStripeInvoiceMap(
-  entityManager: EntityManager,
-  id: string,
-  externalId: string
-) {
-  const startTime = performance.now();
-  try {
-    const result = await entityManager.query(
-      `INSERT INTO stripe_invoice_map (id, externalId) VALUES (?, ?)`,
-      [id, externalId]
-    );
-    console.log("Insert 결과:", result);
-    return result;
-  } catch (error) {
-    console.error("Insert 중 오류 발생:", error);
-    throw error;
-  } finally {
-    const endTime = performance.now();
-    console.log(`쿼리 실행 시간: ${endTime - startTime} ms`);
-  }
-}
+// async function insertStripeInvoiceMap(
+//   entityManager: EntityManager,
+//   id: string,
+//   externalId: string
+// ) {
+//   const startTime = performance.now();
+//   try {
+//     const result = await entityManager.query(
+//       `INSERT INTO stripe_invoice_map (id, externalId) VALUES (?, ?)`,
+//       [id, externalId]
+//     );
+//     console.log("Insert 결과:", result);
+//     return result;
+//   } catch (error) {
+//     console.error("Insert 중 오류 발생:", error);
+//     throw error;
+//   } finally {
+//     const endTime = performance.now();
+//     console.log(`쿼리 실행 시간: ${endTime - startTime} ms`);
+//   }
+// }
 
 async function logDatabaseMetricsWithExplanations(queryRunner: QueryRunner) {
   const logQuery = async (query: string, description: string) => {

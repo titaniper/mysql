@@ -1,0 +1,3 @@
+[submodule "projects/performance-insight"]
+	path = projects/performance-insight
+	url = git@github.com:titaniper/performance-insight.git
